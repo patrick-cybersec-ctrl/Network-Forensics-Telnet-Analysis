@@ -4,6 +4,7 @@
 This project demonstrates the security risks of using unencrypted protocols. By capturing and analyzing Telnet (Port 23) traffic, I successfully extracted user credentials and identified network anomalies.
 
 ---
+![Traffic Overview](./01_Telnet_Traffic_Overview.jpeg)
 
 ## 2. Traffic Identification & Method
 I isolated Telnet traffic to observe the handshake between the client (`192.168.0.2`) and the server (`192.168.0.1`). To view the full dialogue, I utilized the **Follow TCP Stream** feature.
