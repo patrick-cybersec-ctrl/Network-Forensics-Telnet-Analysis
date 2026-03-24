@@ -1,28 +1,41 @@
 # Project 1: Telnet Network Forensic Analysis
 
-## Executive Summary
+## 1. Executive Summary
 This project demonstrates the security risks of using unencrypted protocols. By capturing and analyzing Telnet (Port 23) traffic, I successfully extracted user credentials and identified network anomalies.
 
-## Tools Used
-* **Wireshark:** Packet capture and protocol analysis.
-* **TCP Stream Reconstruction:** To view the application-layer dialogue.
+---
 
-## Technical Deep-Dive
+## 2. Traffic Identification & Method
+I isolated Telnet traffic to observe the handshake between the client (`192.168.0.2`) and the server (`192.168.0.1`). To view the full dialogue, I utilized the **Follow TCP Stream** feature.
 
-### 1. Traffic Identification
-I isolated Telnet traffic to observe the handshake between the client (`192.168.0.2`) and the server (`192.168.0.1`).
+![Method Screenshot](./02_TCP_Stream_Follow_Method.jpeg)
 
-### 2. Credential Extraction
-Using the **Follow TCP Stream** method, I reconstructed the session to reveal the plaintext login:
+---
+
+## 3. Credential Extraction (The "Smoking Gun")
+By reconstructing the session, I revealed the plaintext login and password. This proves that any attacker with access to the network tap can harvest credentials without needing to crack encryption.
+
 * **Username:** fake
 * **Password:** user
 
-### 3. Data Integrity & Hex Analysis
-I verified the raw data by correlating the ASCII character **'U'** to its Hexadecimal value **'55'**, proving a deep understanding of packet-level data representation.
+![Credentials Screenshot](./03_Cleartext_Credentials.jpeg)
 
-### 4. Anomaly Detection
-The capture revealed **Malformed Packets**, indicating potential protocol instability or a service-level error during the session.
+---
 
-## Mitigation Recommendations
+## 4. Data Integrity & Hex Analysis
+I verified the raw data by correlating the ASCII character **'U'** to its Hexadecimal value **'55'**. This level of analysis ensures that the captured data hasn't been tampered with and confirms the character encoding used by the terminal.
+
+![Hex Analysis](./04_Hex_ASCII_Correlation.jpeg)
+
+---
+
+## 5. Anomaly Detection
+The capture revealed **Malformed Packets** (highlighted in red/black). In a security context, these can indicate protocol instability or an attempt to exploit a service through malformed data injection.
+
+![Anomaly Detection](./05_Malformed_Packet_Anomaly.jpeg)
+
+---
+
+## 6. Mitigation Recommendations
 * **Disable Telnet:** Transition all remote management to **SSH (Port 22)**.
 * **Encryption:** Implement TLS/SSL for all data in transit to prevent credential harvesting.
