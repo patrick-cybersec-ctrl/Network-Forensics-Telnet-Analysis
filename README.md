@@ -24,7 +24,7 @@ By reconstructing the session, I revealed the plaintext login and password. This
 ---
 
 ## 4. Data Integrity & Hex Analysis
-I verified the raw data by correlating the ASCII character **'U'** to its Hexadecimal value **'55'**. This level of analysis ensures that the captured data hasn't been tampered with and confirms the character encoding used by the terminal.
+I verified the raw data by correlating the ASCII character **'f'** to its Hexadecimal value **'66'**. This level of analysis ensures that the captured data hasn't been tampered with and confirms the character encoding used by the terminal.
 
 ![Hex Analysis](./04_Hex_ASCII_Correlation.jpeg)
 
